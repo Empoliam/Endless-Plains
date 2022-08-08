@@ -1,4 +1,4 @@
-package dev.patchi.silk.gui;
+package dev.patchi.silk;
 
 import org.lwjgl.Version;
 import org.lwjgl.glfw.GLFWErrorCallback;
@@ -77,6 +77,11 @@ public class Window {
             throw new IllegalStateException("Failed to create glfw window.");
         }
 
+        glfwSetCursorPosCallback(glfwWindow, MouseListener::mousePosCallback);
+        glfwSetMouseButtonCallback(glfwWindow, MouseListener::mouseButtonCallback);
+        glfwSetScrollCallback(glfwWindow, MouseListener::mouseScrollCallback);
+        glfwSetKeyCallback(glfwWindow, KeyListener::keyCallback);
+
         glfwMakeContextCurrent(glfwWindow);
         glfwSwapInterval(1);
 
@@ -94,6 +99,10 @@ public class Window {
 
             // Poll events
             glfwPollEvents();
+
+            if(KeyListener.isKeyPressed(GLFW_KEY_SPACE)) {
+                System.out.println("Space");
+            }
 
             glClearColor(0.75f, 0.4f, 0.75f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
