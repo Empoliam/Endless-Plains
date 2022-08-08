@@ -1,12 +1,14 @@
 package dev.patchi.silk;
 
-import org.lwjgl.*;
+import dev.patchi.silk.gui.Window;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        System.out.println("LWJGL Version: " + Version.getVersion());
+
+        Window window = Window.get();
+        window.run();
+
     }
 
 }
